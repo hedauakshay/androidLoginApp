@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "657969251664",
+    "firebase_url": "https://loginandroid-fec47.firebaseio.com",
+    "project_id": "loginandroid-fec47",
+    "storage_bucket": "loginandroid-fec47.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:657969251664:android:c7c828cfb622491b",
+        "android_client_info": {
+          "package_name": "com.example.student.loginapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "657969251664-703n6bq4nrvk3ga4lpqbk3vecg9j4tic.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.student.loginapp",
+            "certificate_hash": "6f797ad5ac30a3631b0508060727603aa6f6a249"
+          }
+        },
+        {
+          "client_id": "657969251664-9bgk00smhng90cpqmpq31roh080ho730.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0CuWh5sXNCwwAzI_SnIIjg3e_ZKgChDg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "657969251664-9bgk00smhng90cpqmpq31roh080ho730.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#c3cee0"
+    tools:context="com.example.student.loginapp.MainActivity">
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Enter Email ID"
+        android:inputType="textEmailAddress"
+        tools:layout_editor_absoluteX="85dp"
+        tools:layout_editor_absoluteY="97dp"
+        android:gravity="center"
+        android:layout_above="@+id/pwd"
+        android:layout_alignLeft="@+id/pwd"
+        android:layout_alignStart="@+id/pwd"
+        android:layout_marginBottom="47dp" />
+
+    <EditText
+        android:id="@+id/pwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Enter Password"
+        android:inputType="textPassword"
+        tools:layout_editor_absoluteX="83dp"
+        tools:layout_editor_absoluteY="191dp"
+        android:gravity="center"
+        android:layout_above="@+id/submit"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="59dp" />
+
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#3267bc"
+        android:backgroundTint="#3267bc"
+        android:text="LOGIN"
+        tools:layout_editor_absoluteX="147dp"
+        tools:layout_editor_absoluteY="309dp"
+        android:layout_marginBottom="38dp"
+        android:layout_above="@+id/reg"
+        android:layout_alignLeft="@+id/reg"
+        android:layout_alignStart="@+id/reg" />
+
+    <Button
+        android:id="@+id/reg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#3267bc"
+        android:backgroundTint="#3267bc"
+        android:text="SIGNUP"
+        tools:layout_editor_absoluteX="147dp"
+        tools:layout_editor_absoluteY="409dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="70dp" />
+
+    <TextView
+        android:id="@+id/res"
+        android:layout_width="144dp"
+        android:layout_height="39dp"
+        android:gravity="center"
+        tools:layout_editor_absoluteX="120dp"
+        tools:layout_editor_absoluteY="29dp"
+        android:layout_above="@+id/email"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="25dp" />
+</RelativeLayout>
