@@ -16,10 +16,13 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import org.w3c.dom.Text;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Register extends AppCompatActivity {
 
     Button signup;
-    EditText fname, email, pwd, phoneNo;
+    EditText fname, email, pwd, phoneNo, uName;
     TextView res;
     Spinner gender;
 
@@ -36,9 +39,6 @@ public class Register extends AppCompatActivity {
         gender = (Spinner) findViewById(R.id.gender);
         res = (TextView) findViewById(R.id.textView);
 
-        DatabaseReference login = FirebaseDatabase.getInstance().getReference();
-        final DatabaseReference ip = login.child("UserInfo");
-
         signup.setOnClickListener(new View.OnClickListener(){
             public void onClick(View V){
                 String ipfullName = fname.getText().toString();
@@ -46,7 +46,21 @@ public class Register extends AppCompatActivity {
                 String ippwd = pwd.getText().toString();
                 String ipPhone = phoneNo.getText().toString();
                 String ipSex = gender.getSelectedItem().toString();
-                res.setText(ipSex);
+                int index = ipemailID.indexOf('@');
+                String uname = ipemailID.substring(0,index);
+
+                Map<String, String> entry = new HashMap<>();
+                entry.put("EmailID",ipemailID);
+                entry.put("Name", ipfullName);
+                entry.put("Password", ippwd);
+                entry.put("Phone No", ipPhone);
+                entry.put("Sex", ipSex);
+
+                DatabaseReference loginDB = FirebaseDatabase.getInstance().getReference();
+                DatabaseReference ll = loginDB.child("UserInfo");
+                DatabaseReference newPostRef = ll.child(uname).push();
+                newPostRef.setValue(entry);
+
                 Intent login = new Intent(Register.this, MainActivity.class);
                 startActivity(login);
             }
