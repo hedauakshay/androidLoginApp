@@ -33,6 +33,7 @@ public class Register extends AppCompatActivity {
 
         signup = (Button) findViewById(R.id.register);
         fname = (EditText) findViewById(R.id.name);
+        uName = (EditText) findViewById(R.id.userName);
         email = (EditText) findViewById(R.id.email);
         pwd = (EditText) findViewById(R.id.pwd);
         phoneNo = (EditText) findViewById(R.id.phone);
@@ -46,8 +47,7 @@ public class Register extends AppCompatActivity {
                 String ippwd = pwd.getText().toString();
                 String ipPhone = phoneNo.getText().toString();
                 String ipSex = gender.getSelectedItem().toString();
-                int index = ipemailID.indexOf('@');
-                String uname = ipemailID.substring(0,index);
+                String uname = uName.getText().toString();
 
                 Map<String, String> entry = new HashMap<>();
                 entry.put("EmailID",ipemailID);

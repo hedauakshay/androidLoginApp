@@ -9,8 +9,16 @@ import android.widget.EditText;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,24 +35,54 @@ public class MainActivity extends AppCompatActivity {
         signup = (Button) findViewById(R.id.reg);
         email = (EditText) findViewById(R.id.email);
         pwd = (EditText) findViewById(R.id.pwd);
-        res = (TextView) findViewById(R.id.reg);
+        res = (TextView) findViewById(R.id.res);
 
-        DatabaseReference login = FirebaseDatabase.getInstance().getReference();
-        final DatabaseReference ip = login.child("UserCredentials");
+        final DatabaseReference login = FirebaseDatabase.getInstance().getReference();
+        final DatabaseReference ip = login.child("UserInfo");
 
         sigin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
-                String ipEmail = email.getText().toString();
-                String ippwd = pwd.getText().toString();
-                res.setText(ipEmail+" : "+ippwd);
-                DatabaseReference childEmail = ip.child("Email");
-                childEmail.setValue(ipEmail);
-                DatabaseReference childPwd = ip.child("Password");
-                childPwd.setValue(ippwd);
+                final String ipEmail = email.getText().toString();
+                final String ippwd = pwd.getText().toString();
+
+                ip.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(final DataSnapshot snapshot) {
+                        if (snapshot.child(ipEmail).exists()) {
+                            DatabaseReference ip2 = login.child("UserInfo").child(ipEmail).child("Password");
+                            ip2.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    if(snapshot.child(ippwd).exists()){
+                                        res.setText(" User Found");
+                                        //Get all records
+                                        Map<String, String> td = (HashMap<String,String>) dataSnapshot.getValue();
+                                        //End of code
+                                        Intent loggedIn = new Intent(MainActivity.this, LoggedIn.class);
+                                        //loggedIn.putExtra("Val",contactChildren);
+                                        startActivity(loggedIn);
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
+                        }else{
+                            res.setText("Username: Not Found");
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
             }
         });
 
-        res.setOnClickListener(new View.OnClickListener() {
+        signup.setOnClickListener(new View.OnClickListener() {
             public void onClick(View V){
                 Intent registerScreen = new Intent(MainActivity.this, Register.class);
                 startActivity(registerScreen);

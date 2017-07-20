@@ -11,16 +11,16 @@
         android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Enter Email ID"
-        android:inputType="textEmailAddress"
-        tools:layout_editor_absoluteX="85dp"
-        tools:layout_editor_absoluteY="97dp"
-        android:gravity="center"
         android:layout_above="@+id/pwd"
         android:layout_alignLeft="@+id/pwd"
         android:layout_alignStart="@+id/pwd"
-        android:layout_marginBottom="47dp" />
+        android:layout_marginBottom="47dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Enter Username"
+        android:inputType="textEmailAddress"
+        tools:layout_editor_absoluteX="85dp"
+        tools:layout_editor_absoluteY="97dp" />
 
     <EditText
         android:id="@+id/pwd"
