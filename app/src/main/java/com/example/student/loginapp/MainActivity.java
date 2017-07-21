@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
@@ -13,15 +14,19 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "Akshay";
     Button sigin, signup;
     EditText email, pwd;
     TextView res;
@@ -42,25 +47,39 @@ public class MainActivity extends AppCompatActivity {
 
         sigin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
+                res.setText("Hello");
                 final String ipEmail = email.getText().toString();
                 final String ippwd = pwd.getText().toString();
 
                 ip.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(final DataSnapshot snapshot) {
-                        if (snapshot.child(ipEmail).exists()) {
-                            DatabaseReference ip2 = login.child("UserInfo").child(ipEmail).child("Password");
-                            ip2.addListenerForSingleValueEvent(new ValueEventListener() {
+                        if (ipEmail.length() > 0 && snapshot.child(ipEmail).exists()) {
+                            res.setText("User Name Found");
+                            DatabaseReference ip2 = login.child("UserInfo").child(ipEmail);
+                            ip2.addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
-                                    if(snapshot.child(ippwd).exists()){
-                                        res.setText(" User Found");
-                                        //Get all records
-                                        Map<String, String> td = (HashMap<String,String>) dataSnapshot.getValue();
-                                        //End of code
+                                    HashMap<String, String> userInfoFB = new HashMap<String, String>();
+                                    ArrayList<String> ids = new ArrayList<String>();
+                                    for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+                                        ids.add(childSnapshot.getValue().toString());
+                                    }
+                                    String resUp = ids.get(0).toString();
+                                    resUp = resUp.substring(1,resUp.length()-1);
+                                    String[] resVal = resUp.split(", ");
+                                    for (int i =0; i<resVal.length; i++) {
+                                        String[] innVal = resVal[i].split("=");
+                                        userInfoFB.put(innVal[0], innVal[1]);
+                                    }
+                                    Log.i(TAG, "UserInfoFB " + userInfoFB);
+                                    if(ippwd.length() > 0 && userInfoFB.get("Password").equals(ippwd)){
+                                        res.setText("User Found");
                                         Intent loggedIn = new Intent(MainActivity.this, LoggedIn.class);
-                                        //loggedIn.putExtra("Val",contactChildren);
+                                        loggedIn.putExtra("Val", userInfoFB);
                                         startActivity(loggedIn);
+                                    }else{
+                                        res.setText("Password "+ippwd+" not found");
                                     }
                                 }
 
@@ -70,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                             });
                         }else{
-                            res.setText("Username: Not Found");
+                            res.setText("Username "+ipEmail+" Not Found");
                         }
                     }
                     @Override

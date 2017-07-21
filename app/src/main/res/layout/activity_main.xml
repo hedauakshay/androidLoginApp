@@ -11,16 +11,16 @@
         android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/pwd"
-        android:layout_alignLeft="@+id/pwd"
-        android:layout_alignStart="@+id/pwd"
-        android:layout_marginBottom="47dp"
+        android:layout_marginBottom="39dp"
         android:ems="10"
         android:gravity="center"
         android:hint="Enter Username"
         android:inputType="textEmailAddress"
         tools:layout_editor_absoluteX="85dp"
-        tools:layout_editor_absoluteY="97dp" />
+        tools:layout_editor_absoluteY="97dp"
+        android:layout_above="@+id/pwd"
+        android:layout_alignLeft="@+id/pwd"
+        android:layout_alignStart="@+id/pwd" />
 
     <EditText
         android:id="@+id/pwd"
@@ -32,9 +32,9 @@
         tools:layout_editor_absoluteX="83dp"
         tools:layout_editor_absoluteY="191dp"
         android:gravity="center"
+        android:layout_marginBottom="41dp"
         android:layout_above="@+id/submit"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="59dp" />
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/submit"
@@ -73,4 +73,18 @@
         android:layout_above="@+id/email"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="25dp" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/res"
+        android:layout_alignLeft="@+id/email"
+        android:layout_alignStart="@+id/email"
+        android:layout_marginBottom="27dp"
+        android:background="@android:color/transparent"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="textPersonName"
+        android:text="My App" />
 </RelativeLayout>

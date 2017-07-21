@@ -7,4 +7,46 @@
     tools:context="com.example.student.loginapp.LoggedIn"
     android:background="@drawable/raod">
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#000000"
+        android:text="WELCOME"
+        android:textColor="#2a73ea"
+        android:textSize="18sp"
+        android:layout_marginTop="60dp"
+        android:gravity="center"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/uName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="37dp"
+        android:gravity="center_horizontal"
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/phoneNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/uName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp" />
+
+    <ImageButton
+        android:id="@+id/logOut"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/holo_red_dark"
+        android:tint="@android:color/black"
+        app:srcCompat="@android:drawable/ic_lock_power_off" />
+
 </RelativeLayout>
