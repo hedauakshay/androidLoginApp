@@ -13,7 +13,7 @@ import java.util.HashMap;
 public class LoggedIn extends AppCompatActivity {
 
     TextView userName, phoneNo;
-    ImageButton signOut;
+    ImageButton signOut, editorTab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,10 +23,12 @@ public class LoggedIn extends AppCompatActivity {
         userName = (TextView) findViewById(R.id.uName);
         phoneNo = (TextView) findViewById(R.id.phoneNo);
         signOut = (ImageButton) findViewById(R.id.logOut);
+        editorTab = (ImageButton) findViewById(R.id.editor);
         final Intent goBack = new Intent(LoggedIn.this, MainActivity.class);
+        final Intent editorActivity = new Intent(LoggedIn.this, editor.class);
 
         Intent it = getIntent();
-        HashMap<String, String> hashMap = (HashMap<String, String>)it.getSerializableExtra("Val");
+        final HashMap<String, String> hashMap = (HashMap<String, String>)it.getSerializableExtra("Val");
 
         userName.setText(hashMap.get("Name"));
         phoneNo.setText(hashMap.get("Phone No"));
@@ -34,6 +36,13 @@ public class LoggedIn extends AppCompatActivity {
         signOut.setOnClickListener(new View.OnClickListener(){
             public void onClick(View V){
                 startActivity(goBack);
+            }
+        });
+
+        editorTab.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View V){
+                editorActivity.putExtra("note", hashMap.get("NotePad"));
+                startActivity(editorActivity);
             }
         });
 

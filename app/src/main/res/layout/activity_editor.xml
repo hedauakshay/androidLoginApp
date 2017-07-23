@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.student.loginapp.editor"
+    android:background="@drawable/editorwall">
+
+    <EditText
+        android:id="@+id/notepad"
+        android:layout_width="290dp"
+        android:layout_height="500dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="45dp"
+        android:layout_marginTop="65dp"
+        android:gravity="top|left"
+        android:background="@null"
+        android:inputType="textMultiLine|textNoSuggestions"
+        android:minLines="10"
+        android:imeOptions="actionNone"
+        android:text="Story : \n" />
+
+    <ImageButton
+        android:id="@+id/back"
+        android:layout_width="100dp"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:background="#31d641"
+        app:srcCompat="@android:drawable/ic_menu_save" />
+
+    <ImageButton
+        android:id="@+id/save"
+        android:layout_width="100dp"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/back"
+        android:background="#cc2247"
+        app:srcCompat="?attr/actionModeCloseDrawable"/>
+
+</RelativeLayout>
