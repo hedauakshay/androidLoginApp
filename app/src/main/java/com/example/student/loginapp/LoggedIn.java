@@ -28,6 +28,7 @@ public class LoggedIn extends AppCompatActivity {
 
         Intent it = getIntent();
         final HashMap<String, String> hashMap = (HashMap<String, String>)it.getSerializableExtra("Val");
+        final String uName = (String)it.getSerializableExtra("ipEmail");
 
         userName.setText(hashMap.get("Name"));
         phoneNo.setText(hashMap.get("Phone No"));
@@ -40,9 +41,14 @@ public class LoggedIn extends AppCompatActivity {
 
         editorTab.setOnClickListener(new View.OnClickListener(){
             public void onClick(View V){
-                editorActivity.putExtra("note", hashMap.get("NotePad"));
+                if (hashMap.containsKey("NotePad")) {
+                    editorActivity.putExtra("note", hashMap.get("NotePad"));
+                }else{
+                    editorActivity.putExtra("note", "");
+                }
                 editorActivity.putExtra("Val", hashMap);
                 editorActivity.putExtra("emailID", hashMap.get("EmailID"));
+                editorActivity.putExtra("uName", uName);
                 startActivity(editorActivity);
             }
         });

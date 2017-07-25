@@ -19,12 +19,18 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.StringTokenizer;
 
 public class Editor extends AppCompatActivity {
 
     ImageButton saveCont, goBack;
     EditText note;
+    String key;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +45,41 @@ public class Editor extends AppCompatActivity {
         final Intent goBackTab = new Intent(Editor.this, LoggedIn.class);
         final HashMap<String, String> hashMap = (HashMap<String, String>)it.getSerializableExtra("Val");
         final String ipEmail = (String)it.getSerializableExtra("emailID");
+        final String uName = (String)it.getSerializableExtra("uName");
 
         final DatabaseReference update = FirebaseDatabase.getInstance().getReference();
         Log.i("NoteContent", noteContent);
         note.setText(noteContent);
+        //String key = null;
+
+        update.child("UserInfo").child(uName).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                try {
+                    if (snapshot.getValue() != null) {
+                        try {
+                             // your name values you will get here
+                            String response = snapshot.getValue().toString();
+                            int id = response.indexOf("=");
+                            key = response.substring(1,id);
+                            Log.i("NoteContent2", key);
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        Log.i("TAG", " it's null.");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         goBack.setOnClickListener(new View.OnClickListener(){
             public void onClick(View V){
@@ -55,21 +92,27 @@ public class Editor extends AppCompatActivity {
         saveCont.setOnClickListener(new View.OnClickListener(){
             public void onClick(View V){
                 Log.i("ipEmail", ipEmail);
-                String key =  update.child("UserInfo").child("hedauakshay").push().getKey();
-                update.child("UserInfo").child("hedauakshay").child("-KpNOC90YQtYQ2uBluqz").child("NotePad").runTransaction(new Transaction.Handler() {
-                    @Override
-                    public Transaction.Result doTransaction(MutableData mutableData) {
-                        String s = mutableData.getValue(String.class);
-                        mutableData.setValue(note.getText().toString());
-                        return Transaction.success(mutableData);
-                    }
+                //String key =  update.child("UserInfo").child("hedauakshay").push().getKey();
+                changeRecord(note.getText().toString(), uName);
 
-                    @Override
-                    public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
+                Toast.makeText(Editor.this, "Save", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 
-                    }
-                });
-                Toast.makeText(Editor.this, "Save"+key, Toast.LENGTH_LONG).show();
+    protected void changeRecord(final String message, String uName){
+        final DatabaseReference updateRec = FirebaseDatabase.getInstance().getReference();
+        updateRec.child("UserInfo").child(uName).child(key).child("NotePad").runTransaction(new Transaction.Handler() {
+            @Override
+            public Transaction.Result doTransaction(MutableData mutableData) {
+                //String s = mutableData.getValue(String.class);
+                mutableData.setValue(message);
+                return Transaction.success(mutableData);
+            }
+
+            @Override
+            public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
+
             }
         });
     }

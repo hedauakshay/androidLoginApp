@@ -78,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
                                         res.setText("User Found");
                                         Intent loggedIn = new Intent(MainActivity.this, LoggedIn.class);
                                         loggedIn.putExtra("Val", userInfoFB);
+                                        loggedIn.putExtra("ipEmail", ipEmail);
+
                                         startActivity(loggedIn);
                                     }else{
                                         res.setText("Password "+ippwd+" not found");
