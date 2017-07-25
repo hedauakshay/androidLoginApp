@@ -30,7 +30,7 @@
 
         <activity android:name=".Register" />
         <activity android:name=".LoggedIn" />
-        <activity android:name=".editor"></activity>
+        <activity android:name=".Editor"></activity>
     </application>
 
 </manifest>

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -25,7 +24,7 @@ public class LoggedIn extends AppCompatActivity {
         signOut = (ImageButton) findViewById(R.id.logOut);
         editorTab = (ImageButton) findViewById(R.id.editor);
         final Intent goBack = new Intent(LoggedIn.this, MainActivity.class);
-        final Intent editorActivity = new Intent(LoggedIn.this, editor.class);
+        final Intent editorActivity = new Intent(LoggedIn.this, Editor.class);
 
         Intent it = getIntent();
         final HashMap<String, String> hashMap = (HashMap<String, String>)it.getSerializableExtra("Val");
@@ -42,6 +41,8 @@ public class LoggedIn extends AppCompatActivity {
         editorTab.setOnClickListener(new View.OnClickListener(){
             public void onClick(View V){
                 editorActivity.putExtra("note", hashMap.get("NotePad"));
+                editorActivity.putExtra("Val", hashMap);
+                editorActivity.putExtra("emailID", hashMap.get("EmailID"));
                 startActivity(editorActivity);
             }
         });

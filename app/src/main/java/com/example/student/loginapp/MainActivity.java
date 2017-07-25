@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
                                     HashMap<String, String> userInfoFB = new HashMap<String, String>();
                                     ArrayList<String> ids = new ArrayList<String>();
                                     for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+                                        Log.i("From Main", childSnapshot.getKey().toString()+" -- "+childSnapshot.getValue().toString());
                                         ids.add(childSnapshot.getValue().toString());
                                     }
                                     String resUp = ids.get(0).toString();
